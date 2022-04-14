@@ -2,6 +2,8 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 
+const generateToken = require("../config/generateToken");
+
 // Logic to create a new user and saving it in mongoDB
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
@@ -32,6 +34,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      token: generateToken(user._id),
     });
   } else {
     res.status(400).json({ error: "Failed to create user." });
