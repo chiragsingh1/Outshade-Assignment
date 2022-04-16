@@ -5,7 +5,6 @@ const Event = require("../models/eventModel");
 // Logic to fetch only logged in user's created Events and invited Events
 const fetchEvents = asyncHandler(async (req, res) => {
   const { userID } = req.body;
-
   if (!userID) {
     return res.status(400).json({ error: "Send a correct User ID." });
   }
